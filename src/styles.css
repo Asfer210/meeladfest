@@ -132,6 +132,42 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+/* ── Scoreboard design system ────────────────────────────────────────── */
+
+:root {
+  --background: oklch(0.16 0.03 265);
+  --foreground: oklch(0.98 0.005 250);
+  --card: oklch(0.21 0.035 265);
+  --card-foreground: oklch(0.98 0.005 250);
+  --popover: oklch(0.21 0.035 265);
+  --popover-foreground: oklch(0.98 0.005 250);
+  --primary: oklch(0.72 0.16 250);
+  --primary-foreground: oklch(0.16 0.03 265);
+  --secondary: oklch(0.26 0.035 265);
+  --secondary-foreground: oklch(0.98 0.005 250);
+  --muted: oklch(0.26 0.035 265);
+  --muted-foreground: oklch(0.72 0.03 260);
+  --accent: oklch(0.28 0.04 265);
+  --accent-foreground: oklch(0.98 0.005 250);
+  --destructive: oklch(0.68 0.2 25);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.72 0.16 250);
+
+  --group-neel: oklch(0.66 0.19 255);
+  --group-dijla: oklch(0.64 0.22 25);
+  --group-furath: oklch(0.68 0.18 150);
+
+  --chart-grid: oklch(1 0 0 / 8%);
+  --chart-cursor: oklch(1 0 0 / 5%);
+}
+
+@theme inline {
+  --color-group-neel: var(--group-neel);
+  --color-group-dijla: var(--group-dijla);
+  --color-group-furath: var(--group-furath);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -139,6 +175,108 @@
 
   body {
     background-color: var(--color-background);
+    background-image:
+      radial-gradient(circle at 15% 0%, oklch(0.66 0.19 255 / 18%), transparent 55%),
+      radial-gradient(circle at 85% 10%, oklch(0.64 0.22 25 / 14%), transparent 55%),
+      radial-gradient(circle at 50% 100%, oklch(0.68 0.18 150 / 14%), transparent 55%);
+    background-attachment: fixed;
     color: var(--color-foreground);
   }
 }
+
+.group-card {
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--group) 22%, transparent), transparent 70%),
+    var(--card);
+  border-color: color-mix(in oklab, var(--group) 45%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--group) 18%, transparent),
+    0 24px 60px -30px color-mix(in oklab, var(--group) 60%, transparent);
+  transition: transform 0.25s ease;
+}
+
+.group-card:hover {
+  transform: translateY(-2px);
+}
+
+.score-value {
+  color: color-mix(in oklab, var(--group) 78%, white);
+  text-shadow: 0 0 40px color-mix(in oklab, var(--group) 45%, transparent);
+}
+
+.score-pop {
+  animation: score-pop 0.6s ease;
+}
+
+@keyframes score-pop {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.14);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.leader-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--group) 30%, transparent);
+  border: 1px solid color-mix(in oklab, var(--group) 55%, transparent);
+  padding: 0.25rem 0.65rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.chart-panel,
+.login-panel {
+  background: color-mix(in oklab, var(--card) 82%, transparent);
+  border-color: var(--border);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 30px 80px -50px oklch(0 0 0 / 80%);
+}
+
+.adjust-input {
+  background: oklch(1 0 0 / 5%);
+  border-color: var(--input);
+  color: var(--foreground);
+  outline: none;
+}
+
+.adjust-input:focus-visible {
+  border-color: color-mix(in oklab, var(--group, var(--ring)) 70%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--group, var(--ring)) 25%, transparent);
+}
+
+.adjust-btn {
+  transition:
+    opacity 0.2s ease,
+    transform 0.15s ease;
+}
+
+.adjust-btn:active {
+  transform: scale(0.97);
+}
+
+.adjust-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.adjust-btn-add {
+  background: color-mix(in oklab, var(--group) 85%, black);
+  color: oklch(1 0 0);
+}
+
+.adjust-btn-sub {
+  background: oklch(1 0 0 / 8%);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+
