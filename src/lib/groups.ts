@@ -31,9 +31,11 @@ export function sortGroups(rows: GroupScore[]): GroupScore[] {
 }
 
 export function latestUpdatedAt(rows: GroupScore[]): string | null {
-  if (rows.length === 0) return null;
+  const first = rows[0];
+  if (!first) return null;
   return rows.reduce(
     (latest, row) => (new Date(row.updated_at) > new Date(latest) ? row.updated_at : latest),
-    rows[0].updated_at,
+    first.updated_at,
   );
 }
+
