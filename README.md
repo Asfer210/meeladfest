@@ -69,8 +69,8 @@ Configure Supabase using environment variables.
 Use:
 
 ```text
-VITE_SUPABASE_URL : https://pulqfbsxhcoodzqypbrh.supabase.co
-VITE_SUPABASE_ANON_KEY : sb_publishable_Yqo_nw-vnC6rRGhEIPR6Kw_TWNoPLmI
+VITE_SUPABASE_URL 
+VITE_SUPABASE_ANON_KEY 
 ```
 
 or the current Supabase-recommended public/publishable key equivalent.
